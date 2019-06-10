@@ -12,6 +12,7 @@ from scipy import io, misc
 import os
 import re
 import torch
+import imageio
 
 def get_device(ordinal):
     # Use GPU ?
@@ -35,7 +36,9 @@ def open_file(dataset):
         return io.loadmat(dataset)
     elif ext == '.tif' or ext == '.tiff':
         # Load TIFF file
-        return misc.imread(dataset)
+        #return misc.imread(dataset)
+        # Change from imread to imageio because none-working packages
+        return imageio.imread(dataset)
     elif ext == '.hdr':
         img = spectral.open_image(dataset)
         return img.load()
